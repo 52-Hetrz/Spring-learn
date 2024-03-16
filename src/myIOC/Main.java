@@ -10,7 +10,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        IocContainer container = IocContainer.getIocContainer();
+        IOCContainer container = IOCContainer.getIocContainer();
         container.getBean(ServiceTwo.class).func1();
+
     }
 }

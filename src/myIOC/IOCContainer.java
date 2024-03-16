@@ -19,20 +19,20 @@ import java.util.*;
  * @Description
  * @Date 2024/3/15 09:23
  */
-public class IocContainer {
+public class IOCContainer {
 
     // IOC容器单例
-    private static final IocContainer IOC_CONTAINER;
+    private static final IOCContainer IOC_CONTAINER;
 
     static {
         try {
-            IOC_CONTAINER = new IocContainer();
+            IOC_CONTAINER = new IOCContainer();
         } catch (DuplicateBeanName | CircleBeanDependence e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static IocContainer getIocContainer() {
+    public static IOCContainer getIocContainer() {
         return IOC_CONTAINER;
     }
     // 类和对应的Bean
@@ -46,7 +46,7 @@ public class IocContainer {
      * IocContainer的构造函数。<br>
      * 将当前目录下的bean初始化到容器当中
      */
-    private IocContainer() throws DuplicateBeanName, CircleBeanDependence {
+    private IOCContainer() throws DuplicateBeanName, CircleBeanDependence {
         // 构建类依赖信息
         this.buildDependenceInfo();
         // 注入bean
@@ -64,7 +64,7 @@ public class IocContainer {
         // 获取当前JVM正在运行的classpath
         URL classPath = ClassLoader.getSystemClassLoader().getResource("");
         try(URLClassLoader loader = new URLClassLoader(new URL[]{classPath})) {
-            Package pack = IocContainer.class.getPackage();
+            Package pack = IOCContainer.class.getPackage();
             List<String> classNameList = getClassNames(pack.getName());
             for (String className:classNameList){
                 Class<?> clazz = loader.loadClass(className);
